@@ -1,0 +1,29 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /register
+
+spring:
+  application:
+    # 服务名称
+    name: Royce-Registre
+  security:
+    user:
+      name: admin
+      password: admin
+
+eureka:
+  instance:
+    # eureka服务器地址
+    hostname: localhost
+  client:
+    # 是否将服务注册到eureka服务器
+    register-with-eureka: false
+    # 是否从eureka服务拉取服务信息
+    fetch-registry: false
+    # 更新实例信息间隔时间
+    instance-info-replication-interval-seconds: 30
+    service-url:
+      # eureka服务地址
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}${server.servlet.context-path}/eureka/
+      #defaultZone: http://${eureka.instance.hostname}:${server.port}${server.servlet.context-path}/eureka/
